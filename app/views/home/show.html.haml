@@ -1,0 +1,32 @@
+- if @first_post
+  -# Add multiple classes in haml
+  .post.latest
+    %h2= @first_post.title
+    %p= @first_post.category.name
+    %p= @first_post.summary
+    = image_tag @first_post.image.url(:hero)
+    = link_to 'Read Post', post_url(@first_post)
+
+-# each_with_index loops thru featured_posts and tells us in which posts it is.
+  What I wanna say is:
+  if 1 or 2 ... bigger else noraml size featured
+  each with index looks thru all posts but it gives us a 2nd variable : index
+  If you get an error, try using the var index after post |post, index|
+- @featured_posts.each_with_index do |post, index|
+  -# Create a size variable and set it to a ternary
+  -# operator (just an if statement): If index >= 2, then (?) use medium,
+  -# else (:), use large.
+  - size = index >= 2 ? :medium : :large
+  .post.featured{class: size}
+    %h2= post.title
+    %p= post.category.name
+    %p= post.summary
+    = image_tag post.image.url(size)
+    = link_to 'Read Post', post_url(post)
+
+.categories
+  -# categories_url is a helper that comes from the routes
+  = link_to 'View Categories', categories_url
+
+- @posts.each do |post|
+  = render partial: 'posts/medium_unit', locals: {post: post}

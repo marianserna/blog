@@ -1,0 +1,11 @@
+%ul
+  - @categories.each do |category|
+    %li
+      = link_to category.name, category_url(category)
+      = image_tag category.image.url(:medium)
+      -# Display how many posts are there in this category
+      -# Let's use the pluralize method to help us say post or posts depending
+      -# on the number of publications in a category. You give it the number
+      -# (category.published_count), then the word and it figures out whether to
+      -# use singular or plural
+      %p= pluralize(category.published_count, 'Post')

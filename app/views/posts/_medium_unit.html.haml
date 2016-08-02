@@ -1,0 +1,6 @@
+.post.medium
+  %h2= post.title
+  %p= post.category.name
+  %p= post.summary
+  = image_tag post.image.url(:medium)
+  = link_to 'Read Post', post_url(post)

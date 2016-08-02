@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title Blog
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+%body
+  /This is for your flash message to show up
+  - flash.each do |key, value|
+    .callout= value
+
+  = yield

@@ -1,0 +1,8 @@
+%h2= @category.name
+
+= image_tag @category.image.url(:hero)
+
+- @posts.each do |post|
+    = render partial: 'posts/medium_unit', locals: {post: post}
+
+= will_paginate @posts 

@@ -1,0 +1,19 @@
+= link_to('New Post', new_admin_post_url, class: 'button')
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Category
+      %th Image
+      %th Action
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td= post.title
+        %td= post.category.name
+        -# This is to show your image (See paperclip doc). If you don't put :thumb, you'll see the original image
+        %td= image_tag(post.image.url(:thumb))
+        %td= link_to('Edit', edit_admin_post_url(post))
+
+= will_paginate @posts

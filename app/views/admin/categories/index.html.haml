@@ -1,0 +1,16 @@
+= link_to('New Category', new_admin_category_url, class: 'button')
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Image
+      %th Action
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= category.name
+        %td= image_tag category.image.url(:thumb)
+        %td= link_to('Edit', edit_admin_category_url(category))
+
+= will_paginate @categories

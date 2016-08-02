@@ -1,0 +1,12 @@
+-# Use simple_form_for to build a form
+= simple_form_for @category, url: [:admin, @category] do |f|
+  =f.input :name
+  =f.input :slug
+
+  - if @category.image.present?
+    = image_tag @category.image.url(:thumb)
+
+  =f.input :image, as: :file
+
+  =f.submit
+  = link_to('Cancel', admin_categories_url, class: 'button')

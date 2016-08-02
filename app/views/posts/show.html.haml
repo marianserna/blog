@@ -1,0 +1,8 @@
+%h2= @post.title
+%p= @post.category.name
+= image_tag @post.image.url(:hero)
+
+= @post.rendered_content
+
+- @suggested_posts.each do |post|
+  = render partial: 'posts/medium_unit', locals: {post: post}
