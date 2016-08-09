@@ -7,9 +7,21 @@
   - if @post.image.present?
     = image_tag @post.image.url(:thumb)
 
-  =f.input :image, as: :file
-  =f.input :title
-  =f.input :summary
-  =f.input :content
+  = f.input :image, as: :file
+  = f.input :title
+  = f.input :summary
+  = f.input :content
+
+  -# new_admin_post_post_image_url needs brackets after because we have to tell it
+  -# which post we're creating a post_image for
+  = link_to 'New Image', new_admin_post_post_image_url(@post)
+  %ul
+    - @post.post_images.each do |post_image|
+      %li
+        = image_tag post_image.image.url(:thumb)
+        %p= post_image.image.url(:large)
+        %p= post_image.image.url(:medium)
+        %p= post_image.image.url(:small)
+
   =f.submit
   = link_to('Cancel', admin_posts_url, class: 'button')

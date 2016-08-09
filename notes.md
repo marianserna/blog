@@ -1198,6 +1198,7 @@ Go to posts > show.html.haml and change a line of code:
   = render partial: 'posts/medium_unit', locals: {post: post}
 ```
 
+INSTALLING DEVISE --------------------------------------------------------------
 
 Get the devise gem
 
@@ -1248,11 +1249,531 @@ Go to the migration and comment out or delete the ones we aren't using.
 
 `rails db:migrate`
 
-Delete `<%= render "devise/shared/links" %>` from views > sessions > new.html.haml
-(This one should be kept in pintastic)
+Delete `<%= render "devise/shared/links" %>` from views > devise > sessions >
+new.html.haml (This one should be kept in pintastic). This file links to a whole
+bunch of pages that we didn't want devise to control. eg. register and so on.
 
-Now, let's create a user from the command line:
+
+Now, let's create a user in the rails console:
 `User.create!(email: 'marianhalliday@gmail.com', password: 'your password')`
 
 In pintastic, to add a name field, you'll have to add it in the devise migration,
 also in the sign up form and so on.
+
+
+In controllers > admin, create a new file and call it base_controller.rb:
+
+```ruby
+class Admin::BaseController < ApplicationController
+  #before any action happens,call this devise method: You can't visit
+  # the section unless you're authenticated
+  before_action :authenticate_user!
+end
+```
+
+Replace the first line in admin> posts and admin>categories with
+`class Admin::PostsController < Admin::BaseController`
+
+<!-- To create user links: views > layouts > application.html.erb
+
+%body
+  - if user_signed_in?
+    = link_to 'Sign Out', destroy_user_session_url, method: :delete
+  -else
+    = link_to 'Sign In', new_user_session_url -->
+
+STYLING THE FRONT END ----------------------------------------------------------
+
+
+app > assets > stylesheets : Create a new folder called components
+
+In app > assets > stylesheets > application.css, add `*= require_tree ./components`
+
+Inside the components folder, create a nav.scss file
+
+views > layouts > application : Add a nav
+
+```ruby
+%body
+  %nav
+    = link_to image_tag('https://tkruger4.files.wordpress.com/2010/11/logo-2_21.jpg'), root_url, class: 'logo'
+    = link_to 'Categories', categories_url
+```
+
+In assets > stylesheets > components, create a new file called nav.scss
+
+```ruby
+nav {
+  width: 96%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 2%;
+
+  .nav-container {
+    padding: 15px;
+    border-bottom: 2px solid yellow;
+  }
+
+  img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+
+  .logo {
+    position: absolute;
+    left: 0;
+  }
+
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px;
+
+    li {
+      flex-grow: 0;
+      list-style: none;
+      padding-left: 15px;
+    }
+  }
+}
+```
+
+
+Change your views > layouts > application.html.haml code to be more like this:
+
+```ruby
+!!!
+%html
+  %head
+    %title Blog
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+%body
+  %nav
+    .nav-container
+      = link_to image_tag('http://1.bp.blogspot.com/-481lldsZIf0/Un2HCV_SdNI/AAAAAAAAD-M/6iqHbI-dhg8/s1600/staglogo001.png'), root_url, class: 'logo'
+
+      %ul
+        %li= link_to 'Categories', categories_url
+
+        - if user_signed_in?
+          %li= link_to 'Sign Out', destroy_user_session_url, method: :delete
+        -else
+          %li= link_to 'Sign In', new_user_session_url
+
+  /This is for your flash message to show up
+  - flash.each do |key, value|
+    .callout= value
+
+  = yield
+```
+
+--------------------------------------------------------------------------------
+CREATE A WAY TO UPLOAD IMAGES IN YOUR POSTS
+
+
+rails g migration CreatePostImages
+
+Go to the migration:
+
+```ruby
+class CreatePostImages < ActiveRecord::Migration[5.0]
+  def change
+    create_table :post_images do |t|
+      # we need to know which post the image is for
+      t.integer :post_id, null: false
+      # Special field that comes from paperclip
+      t.attachment :image, null: false
+      # t.timestamps is a method, null: false, which is a hash, is the value:
+      # ({null: false}). This is why there's no comma here
+      t.timestamps null: false
+    end
+  end
+end
+```
+
+rails db:migrate
+
+
+We've created the database, now let's create the model: post_image.rb
+
+```ruby
+class PostImage < ApplicationRecord
+  belongs_to :post
+
+  has_attached_file :image, styles: {
+    # In paperclip, the pound means to crop the image to fit in the scpace we are
+    # indicating
+
+    large:  "1500x1500",
+    medium: "1000x1000",
+    small: "500x500",
+    # means cropping, which is why we removed them from hero, large, and medium
+    thumb: "200x200#"
+  }
+
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+
+  validates :image, presence: true
+end
+```
+
+
+In post.rb, put the relationship:
+
+`has_many :post_images`
+
+```ruby
+class Post < ApplicationRecord
+  belongs_to :category
+  has_many :post_images
+  ...
+```
+
+We need routes for the post_images. First, give admin its own root (right now
+  it shows a routing error). Then, do nested routing for post_images
+
+`get '/', to: 'posts#index', as: 'root'`
+<!-- when there's a get request to slash(/) --when you try to get to admin--, route
+that request to the post index controller.
+as: root, gives the route a name, this creates a url in the rails routes -->
+
+
+```ruby
+namespace :admin do
+  get '/', to: 'posts#index', as: 'root'
+  resources :categories
+  resources :posts
+end
+```
+
+then:
+
+```ruby
+resources :posts do
+  resources :post_images, only: [:new, :create, :destroy]
+end
+```
+
+```ruby
+namespace :admin do
+  get '/', to: 'posts#index', as: 'root'
+  resources :categories
+  # nested routing
+  resources :posts do
+    resources :post_images, only: [:new, :create, :destroy]
+  end
+end
+```
+
+Go to admin > posts > form and create a link to add images to your posts.
+then loop thru the posts to show the images at the end.
+
+<!-- -# new_admin_post_post_image_url needs brackets after because we have to tell it
+-# which post we're creating a post_image for -->
+```ruby
+= link_to 'New Image', new_admin_post_post_image_url(@post)
+%ul
+  - @post.post_images.each do |post_image|
+    %li
+      =image_tag post_image.image.url(:thumb)
+      %p= post_image.image.url(:large)
+      %p= post_image.image.url(:medium)
+      %p= post_image.image.url(:small)
+```
+
+Now we need a controller inside the admin: post_images_controller.rb
+
+```ruby
+class Admin::PostImagesController < Admin::BaseController
+  #before doing anything, call the method find_post, which sets the @post variable.
+  before_action :find_post
+
+  def new
+    # If we do PostImage.new, it will create a new image. However, it
+    #   won't identify to which post the image belongs
+    @post_image = @post.post_images.new
+  end
+
+  def create
+    # We create a new image and give it the post_image_params (method below)
+    @post_image = @post.post_images.new(post_image_params)
+    # Try to save the image (! is used only if you want to see what's wrong)
+    if @post_image.save
+      flash[:success] = "Image has been saved!"
+      redirect_to edit_admin_post_url(@post)
+    else
+      flash[:error] = "Oops! Something went wrong..."
+      render :new
+  end
+
+  def destroy
+    @post_image = @post.post_images.find(params[:id])
+    @post_image.destroy
+    flash[:success] = "Image has been deleted."
+    redirect_to edit_admin_post_url(@post)
+  end
+
+  private
+
+  def post_image_params
+    params.require(:post_image).permit(:image)
+  end
+
+  def find_post
+    # First we find the post the image will belong to.
+    # Since this is nested, you need to go to post first
+    # params[:post_id] is used to access the post id, because :id corresponds to
+    # the id of one of the images of that post. The routes will show you this structure:
+    # /admin/posts/:post_id/post_images/:id(.:format)
+    @post = Post.find(params[:post_id])
+  end
+
+end
+```
+
+In views > admin, create a new folder called post_images.
+Inside, create new.html.haml
+
+```ruby
+= simple_form_for @post_image, url: [:admin, @post, @post_image] do |f|
+  -# gives us an image uploader
+  = f.input :image
+  = f.submit
+  = link_to 'Cancel', edit_admin_post_url(@post)
+```
+
+
+
+----------------------- COSA DIFERENTE
+
+
+
+In views > layout > application.html.haml, create a new link to go to the admin if
+you are signed in:
+
+`%li= link_to 'Admin', admin_root_url` (rails routes won't show the link to the
+admin url, but it's admin_root_url)
+
+```ruby
+%nav
+  .nav-container
+    = link_to image_tag('http://1.bp.blogspot.com/-481lldsZIf0/Un2HCV_SdNI/AAAAAAAAD-M/6iqHbI-dhg8/s1600/staglogo001.png'), root_url, class: 'logo'
+
+    %ul
+      %li= link_to 'Categories', categories_url
+
+      - if user_signed_in?
+        %li= link_to 'Admin', admin_root_url
+        %li= link_to 'Sign Out', destroy_user_session_url, method: :delete
+      -else
+        %li= link_to 'Sign In', new_user_session_url
+```
+
+
+--------------------------- GET BETTER MARKDOWN EDITOR: CODEMIRROR
+
+Get the codemirror gem and install it
+`bundle install`
+
+Go to the code source
+Copy this line: `//= require codemirror` and this line `//= require codemirror/modes/ruby`
+change the ruby for markdown because that's what we'll be doing.
+Paste it in app > assets > javascripts > application.js
+
+```
+//= require jquery
+//= require jquery_ujs
+//= require foundation
+//= require turbolinks
+//= require codemirror
+//= require codemirror/modes/markdown
+//= require_tree .
+```
+
+Copy this line: `*= require codemirror` and paste it in
+app > assets > stylesheets > application.css
+
+If you want a theme:
+paste this line `*= require codemirror/themes/material` into
+app > assets > stylesheets > application.css. The last word is the name of the
+theme you chose from codemirror.
+
+Go to config > application and paster the precompile line:
+
+`config.assets.precompile += ["codemirror*", "codemirror/**/*"]`
+
+```ruby
+module Blog
+  class Application < Rails::Application
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+    config.assets.precompile += ["codemirror*", "codemirror/**/*"]
+  end
+end
+```
+
+In app > assets > javascripts > application.js:
+
+From https://codemirror.net/, home page, copy these lines of code
+
+```js
+var editor = CodeMirror.fromTextArea(myTextarea, {
+   lineNumbers: true
+ });
+```
+
+REMOVE the turbolinks: `//= require turbolinks`
+
+Modify the code as follows:
+
+```ruby
+$(function() {
+  // Put the text area input tag in a var
+  var textarea = document.getElementById('post_content');
+
+  // Since not every page has a text area, let us set an if statement:
+  if (textarea) {
+    // Replace myTextarea with textarea
+    var editor = CodeMirror.fromTextArea(textarea, {
+       lineNumbers: true,
+      //  Add more options
+      mode: 'markdown',
+      theme: 'material'
+   });
+  }
+});
+```
+
+---------- SPLIT FRONT AND BACK END stylesheets
+
+1. Go to views > layout and create a new file called admin.html.haml.
+
+Copy everything from application.html.haml into admin.html.haml
+
+Change these 2 lines from saying application to saying admin:
+
+From:
+```
+= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+```
+
+To
+```
+= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload'
+= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
+```
+
+
+Now go to admin > base_controller and add `layout 'admin'`:
+
+```ruby
+class Admin::BaseController < ApplicationController
+  #before any action happens,call this devise method: You can't visit
+  # the section unless you're authenticated
+  before_action :authenticate_user!
+  # Anything in the admin section will use the admin layout
+  layout 'admin'
+end
+```
+
+
+In views > stylesheets, create an admin.scss file. From application.css, bring in
+
+```
+@import "foundation_and_overrides";
+@import "codemirror";
+@import "codemirror/themes/material"
+```
+
+
+Go to views > stylesheets > application.css and rename it to application.scss
+
+Remove everything and leave only
+```
+@import "foundation_and_overrides";
+@import "components/*";
+```
+
+
+-------------------------------------NOW, SPLIT THE JS
+
+app > assets > javascripts
+
+Create an admin.js folder. Copy everything from application.js:
+
+Delete `//= require_tree .`
+
+It'll look like this afterwards:
+
+```js
+# // This is a manifest file that'll be compiled into application.js, which will include all the files
+# // listed below.
+# //
+# // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+# // or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+# //
+# // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# // compiled file. JavaScript code in this file should be added after the last require_* statement.
+# //
+# // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+# // about supported directives.
+# //
+# //= require jquery
+# //= require jquery_ujs
+# //= require foundation
+# //= require codemirror
+# //= require codemirror/modes/markdown
+
+$(function(){ $(document).foundation(); });
+
+$(function() {
+  // Put the text area input tag in a var
+  var textarea = document.getElementById('post_content');
+
+  // Since not every page has a text area, let us set an if statement:
+  if (textarea) {
+    // Replace myTextarea with textarea
+    var editor = CodeMirror.fromTextArea(textarea, {
+       lineNumbers: true,
+      //  Add more options
+      mode: 'markdown',
+      theme: 'material'
+   });
+  }
+});
+```
+
+From app > assets > javascripts > application.js
+
+Delete `//= require_tree .` and all codemirror related code.
+
+Looks like this:
+
+```js
+# // This is a manifest file that'll be compiled into application.js, which will include all the files
+# // listed below.
+# //
+# // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+# // or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+# //
+# // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# // compiled file. JavaScript code in this file should be added after the last require_* statement.
+# //
+# // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+# // about supported directives.
+# //
+# //= require jquery
+# //= require jquery_ujs
+# //= require foundation
+
+
+$(function(){ $(document).foundation(); });
+```
+
+------------------------------------- 

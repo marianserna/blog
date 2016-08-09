@@ -1,4 +1,4 @@
-class Admin::PostsController < ApplicationController
+class Admin::PostsController < Admin::BaseController
 
   def index
     @posts = Post.paginate(page: params[:page])
@@ -10,7 +10,7 @@ class Admin::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if @post.save!
+    if @post.save
       flash[:success] = 'There is a New Post!'
       redirect_to admin_posts_url
     else

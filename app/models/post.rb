@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :category
+  has_many :post_images
 
   validates :title, :summary, :content, :image, presence: true
   has_attached_file :image, styles: {
