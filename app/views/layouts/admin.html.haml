@@ -7,12 +7,17 @@
     = javascript_include_tag 'admin', 'data-turbolinks-track': 'reload'
 
 %body
-  %nav
-    .nav-container
-      = link_to image_tag('http://1.bp.blogspot.com/-481lldsZIf0/Un2HCV_SdNI/AAAAAAAAD-M/6iqHbI-dhg8/s1600/staglogo001.png'), root_url, class: 'logo'
 
-      %ul
-        %li= link_to 'Categories', categories_url
+  %nav.nav-wrapper
+    %ul
+      %li= link_to 'MARIAN SERNA'
+      %li= "X"
+      %li= link_to 'BLOG'
+
+
+      %ul#nav-mobile.right.hide-on-med-and-down
+        %li= link_to 'Categories', admin_categories_url
+        %li= link_to 'Posts', admin_posts_url
 
         - if user_signed_in?
           %li= link_to 'Admin', admin_root_url

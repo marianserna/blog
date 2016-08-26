@@ -1,12 +1,12 @@
-= link_to('New Post', new_admin_post_url, class: 'button')
+= link_to('New Post', new_admin_post_url, class: 'waves-effect waves-light btn')
 
-%table
+%table.responsive-table.highlight.centered
   %thead
     %tr
       %th Name
       %th Category
       %th Image
-      %th Action
+      %th.last Action
   %tbody
     - @posts.each do |post|
       %tr
@@ -14,6 +14,6 @@
         %td= post.category.name
         -# This is to show your image (See paperclip doc). If you don't put :thumb, you'll see the original image
         %td= image_tag(post.image.url(:thumb))
-        %td= link_to('Edit', edit_admin_post_url(post))
+        %td= link_to('Edit', edit_admin_post_url(post), class: 'waves-effect waves-light btn')
 
 = will_paginate @posts

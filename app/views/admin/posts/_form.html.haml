@@ -14,7 +14,9 @@
 
   -# new_admin_post_post_image_url needs brackets after because we have to tell it
   -# which post we're creating a post_image for
-  = link_to 'New Image', new_admin_post_post_image_url(@post)
+  -# persisted? asks if the post is already in the db
+  - if @post.persisted?
+    = link_to 'New Image', new_admin_post_post_image_url(@post)
   %ul
     - @post.post_images.each do |post_image|
       %li
@@ -23,5 +25,5 @@
         %p= post_image.image.url(:medium)
         %p= post_image.image.url(:small)
 
-  =f.submit
-  = link_to('Cancel', admin_posts_url, class: 'button')
+  =f.submit(class: 'btn waves-effect waves-light')
+  = link_to('Cancel', admin_posts_url, class: 'btn waves-effect waves-light')

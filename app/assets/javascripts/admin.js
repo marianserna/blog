@@ -12,11 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
+//= require materialize-sprockets
 //= require codemirror
 //= require codemirror/modes/markdown
 
-$(function(){ $(document).foundation(); });
 
 $(function() {
   // Put the text area input tag in a var
@@ -32,4 +31,8 @@ $(function() {
       theme: 'material'
    });
   }
+});
+
+$(document).ready(function() {
+  $('select').material_select();
 });

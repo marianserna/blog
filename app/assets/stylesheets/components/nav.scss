@@ -1,34 +1,22 @@
 nav {
-  width: 96%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0 2%;
-
-  .nav-container {
-    padding: 15px;
-    border-bottom: 2px solid yellow;
-  }
-
-  img {
-    max-width: 50px;
-    max-height: 50px;
-  }
-
-  .logo {
-    position: absolute;
-    left: 0;
-  }
+  position: relative;
+  width: 100%;
+  border-bottom: solid 0.5px #E0E0E0;
 
   ul {
     display: flex;
-    justify-content: flex-end;
-    margin: 0px;
+  }
 
-    li {
-      flex-grow: 0;
-      list-style: none;
-      padding-left: 15px;
-    }
+  ul li {
+    list-style: none;
+    padding: 10px;
+    font-family: 'News Cycle', sans-serif;
+    font-size: 1.5em;
+    color: #616161;
+  }
+
+  ul li a {
+    text-decoration: none;
+    color: #BDBDBD;
   }
 }

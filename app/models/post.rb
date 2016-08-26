@@ -18,11 +18,16 @@ class Post < ApplicationRecord
   scope :featured, -> { published.where(featured: true) }
   scope :most_recent, -> { order(created_at: :desc) }
 
+  def self.featured_posts
+    all
+  end
+
   def rendered_content
-    #this creates a md processor
+    #this is an instance function that creates a md processor
     #shorter way to do it: markdown = Redcarpet::Markdown.new(Redcarpet::Render
     # ::HTML, autolink: true, tables: true)
     # markdown.render(content).html_safe
+    #Basically it shows md converted into html to the user.
     renderer = Redcarpet::Render::HTML
     extensions = {
       autolink: true,

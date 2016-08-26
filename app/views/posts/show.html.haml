@@ -1,8 +1,18 @@
-%h2= @post.title
-%p= @post.category.name
-= image_tag @post.image.url(:hero)
+#container
 
-= @post.rendered_content
+  .post_image
+    = image_tag @post.image.url(:hero)
 
-- @suggested_posts.each do |post|
-  = render partial: 'posts/medium_unit', locals: {post: post}
+  .post_titles
+    %h2= @post.title
+    -# %p= "in: #{@post.category.name}"
+    %p
+      in:
+      = @post.category.name
+
+  .content
+    = @post.rendered_content
+
+.suggested_posts
+  - @suggested_posts.each do |post|
+    = render partial: 'posts/medium_unit', locals: {post: post}

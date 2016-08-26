@@ -5,22 +5,19 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %link{href: "https://fonts.googleapis.com/css?family=News+Cycle|Playfair+Display", rel: "stylesheet"}
+
 
 %body
   %nav
-    .nav-container
-      = link_to image_tag('http://1.bp.blogspot.com/-481lldsZIf0/Un2HCV_SdNI/AAAAAAAAD-M/6iqHbI-dhg8/s1600/staglogo001.png'), root_url, class: 'logo'
+    %ul
+      %li= link_to 'MARIAN SERNA', about_url
+      %li= "X"
+      %li= link_to 'BLOG', root_url
+      %li.right= link_to 'Portfolio', 'http://www.marianserna.com'
 
-      %ul
-        %li= link_to 'Categories', categories_url
 
-        - if user_signed_in?
-          %li= link_to 'Admin', admin_root_url
-          %li= link_to 'Sign Out', destroy_user_session_url, method: :delete
-        -else
-          %li= link_to 'Sign In', new_user_session_url
-
-  /This is for your flash message to show up
+  -# /This is for your flash message to show up
   - flash.each do |key, value|
     .callout= value
 

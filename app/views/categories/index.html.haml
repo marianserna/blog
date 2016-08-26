@@ -1,11 +1,20 @@
-%ul
-  - @categories.each do |category|
-    %li
-      = link_to category.name, category_url(category)
-      = image_tag category.image.url(:medium)
-      -# Display how many posts are there in this category
-      -# Let's use the pluralize method to help us say post or posts depending
-      -# on the number of publications in a category. You give it the number
-      -# (category.published_count), then the word and it figures out whether to
-      -# use singular or plural
-      %p= pluralize(category.published_count, 'Post')
+-# #categories-container
+-#   .wrapper
+-#     - @categories.each do |category|
+-#       .category
+-#         = link_to category.name, category_url(category)
+-#         %h3= pluralize(category.published_count, 'Post')
+-#         = image_tag category.image.url(:medium)
+-# Display how many posts are there in this category
+-# Let's use the pluralize method to help us say post or posts depending
+-# on the number of publications in a category. You give it the number
+-# (category.published_count), then the word and it figures out whether to
+-# use singular or plural
+
+- @categories.each do |category|
+  %a.category_wrapper{class: :medium, href: category_url(category)}
+    .category{style: "background-image: url('#{category.image.url(:medium)}')"}
+      .background
+        .titles
+          %h2= category.name
+          %h3= pluralize(category.published_count, 'Post')

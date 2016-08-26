@@ -4,8 +4,10 @@ Rails.application.routes.draw do
 
   # Tell it which controller and action will handle the home page: controller home, action show
   root to: 'home#show'
-  resources :posts, only: [:show]
+  resources :posts, only: [:index, :show]
   resources :categories, only: [:index, :show]
+  resources :featured_posts, only: [:index]
+  get '/about', to: 'pages#about', as: :about
 
   namespace :admin do
     get '/', to: 'posts#index', as: 'root'

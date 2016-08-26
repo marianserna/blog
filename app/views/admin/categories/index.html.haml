@@ -1,6 +1,6 @@
-= link_to('New Category', new_admin_category_url, class: 'button')
+= link_to('New Category', new_admin_category_url, class: 'waves-effect waves-light btn')
 
-%table
+%table.responsive-table.highlight.centered
   %thead
     %tr
       %th Name
@@ -11,6 +11,6 @@
       %tr
         %td= category.name
         %td= image_tag category.image.url(:thumb)
-        %td= link_to('Edit', edit_admin_category_url(category))
+        %td= link_to('Edit', edit_admin_category_url(category), class: 'waves-effect waves-light btn')
 
 = will_paginate @categories

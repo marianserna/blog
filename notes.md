@@ -161,6 +161,8 @@ end
 
 Now we need the view. In views > admin > categories, create new.html.haml
 
+
+
 Use the simple_form gem
 
 ```
@@ -346,6 +348,7 @@ Create the view
         %td= link_to('Edit', edit_admin_post_url(post))
 ```
 
+
 For being able to upload images, add the paperclip gem
 `bundle install`
 
@@ -521,7 +524,7 @@ ________________________________________________________________________________
 
 WE'LL CREATE AN UGLY HOME PAGE NOW
 
-this is the flow: route, then controller, then the views for those actions,
+FLOW: this is the flow: route, then controller, then the views for those actions,
 and any models as you need them.
 
 Go to config > routes
@@ -594,7 +597,7 @@ Now, the code in the controller will look like this:
 ```ruby
 class HomeController < ApplicationController
   def show
-    # Fnd the last 18 posts to show them
+    # Find the last 18 posts to show them
     # Use timestamps to order your posted posts from the most recent one
     @first_post = Post.published.most_recent.first
   end
@@ -735,7 +738,7 @@ Run
 It will generate images for the styles you have defined in your models
 (produces them from an original file -- a pic you upload).
 
-
+  FALTA: NOT NEEDED IN HOME PAGE
 Now, let's organize the view to use the sizes we've created
 
 ```ruby
@@ -1205,6 +1208,7 @@ Get the devise gem
 `gem 'devise', '~> 4.2'`
 
 `bundle install
+
 rails generate devise:install --- gives you some steps for the installation
 
 Some setup you must do manually if you haven't yet:
@@ -1238,7 +1242,7 @@ In config > environments > development, put this line of code:
 `config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }`
 
 Run `rails g devise:views` --> this is erb
-Run `rails generate devise MODEL` (MODEL IN THIS CASE WOULD BE USER)
+Run `rails generate devise Model` (MODEL IN THIS CASE WOULD BE USER)
 
 Devise creates a model, migration, views, and tests for you.
 
@@ -1776,4 +1780,21 @@ Looks like this:
 $(function(){ $(document).foundation(); });
 ```
 
-------------------------------------- 
+-------------------------------------
+So, there was an error popping up regarding the stylesheets: admin.css (assets > stylesheets > admin.scss)
+and admin.js (assets > javascripts > admin.js). We link to these in assets > views > layouts > admin.html.haml.
+To fix it, go to config > initializers > assets.rb and add at the very end this line:
+
+`Rails.application.config.assets.precompile += ['admin.css', 'admin.js']`
+
+
+
+
+HAML COMMENTS:
+
+-# <p>
+-#   in: <%= @post.category.name %>
+-# </p>
+
+-# / hello there
+-# <!-- hello there -->
