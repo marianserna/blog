@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   def show
     # Find the last 18 posts to show them
     # Use timestamps to order your posted posts from the most recent one
-    @post = Post.published.most_recent.first
+    @post = Post.latest
     # this is an array of posts
     # Find featured posts where the id is not the same as the first post
     # to avoid having this post twice

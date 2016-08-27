@@ -18,8 +18,23 @@ class Post < ApplicationRecord
   scope :featured, -> { published.where(featured: true) }
   scope :most_recent, -> { order(created_at: :desc) }
 
+  def self.latest
+    published.most_recent.first
+  end
+
   def self.featured_posts
-    all
+    featured.most_recent.
+      where.not(id: latest.id).
+      limit(6)
+  end
+
+  def self.other_posts(page)
+    exclude_ids = featured_posts.pluck(:id)
+    exclude_ids << latest.id
+
+    published.most_recent.
+      where.not(id: exclude_ids).
+      paginate(page: page)
   end
 
   def rendered_content

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.other_posts(params[:page])
   end
 
   def show
