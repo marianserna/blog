@@ -27,11 +27,6 @@
       box-shadow: 2px 2px 3px #888888;
     }
 
-    // aside a:hover {
-    //   // ZOOM TRANSITION
-    //   color: #CDDC39;
-    // }
-
     aside h2 {
       font-size: 2em;
       color: #fff;
@@ -45,16 +40,29 @@
   .latest {
     width: 45%;
     height: 400px;
-    background-size: cover;
-    background-repeat: no-repeat;
     margin-right: 10%;
-    border: solid 3px #263238;
+    position: relative;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      -webkit-filter: blur(2px);
+      -moz-filter: blur(2px);
+      -o-filter: blur(2px);
+      -ms-filter: blur(2px);
+      filter: blur(2px);
+    }
 
     .titles {
-      transform: translateX(10%) translateY(30%);
+      transform: translateX(-18%) translateY(30%);
       line-height: 0.5em;
-      color: #BDBDBD;
-      // text-shadow: 1px 1px #616161;
+      color: #fff;
+      background-color: #263238;
+      padding: 1.5em;
+      box-shadow: 2px 2px 3px #212121;
 
       h2 {
         font-family: 'Playfair Display', serif;
@@ -74,24 +82,24 @@
         font-family: 'News Cycle', sans-serif;
         font-size: 1em;
         line-height: 1.5em;
-        color: #616161;
       }
     }
 
     a {
       position: absolute;
       top: 65%;
-      left: 30%;
+      right: 20%;
       text-decoration: none;
-      color: #263238;
+      color: #fff;
       padding: 20px;
       border-radius: 3%;
       font-family: 'Playfair Display', serif;
+      background-color: #212121;
+      box-shadow: 2px 2px 3px #212121;
+
     }
 
     a:hover {
-      background-color: #E0E0E0;
-      box-shadow: 2px 2px 3px #888888;
       border: solid 1px #CDDC39;
     }
   }

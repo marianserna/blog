@@ -1,8 +1,11 @@
 .home
   .latest
+    .image{style: "background-image: url('#{@post.image.url(:hero)}')"}
     .titles
       %h2= @post.title
-      %h3= @post.category.name
+      %h3
+        In:
+        = @post.category.name
       %p= @post.summary
     = link_to 'READ POST', post_url(@post)
 
@@ -16,6 +19,3 @@
 
       %a{href: posts_url}
         %h2 Other Posts
-
-
--# {style: "background-image: url('#{@post.image.url(:hero)}')"}
