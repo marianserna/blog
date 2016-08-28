@@ -1,8 +1,18 @@
 =simple_form_for(@post, url: [:admin, @post]) do |f|
   -# pluck gives you and array of arrays, which is the format that simple_form expects
   = f.input :category_id, collection: Category.pluck(:name, :id)
-  = f.input :published
-  = f.input :featured
+
+  .fields
+    = f.input_field :featured, boolean_style: :inline
+    = f.label :featured
+    -# Manually, you'd do it like this:
+    -# %input{name: 'posts[featured]', value: '0', type: 'hidden'}
+    -# %input{id: 'posts_featured', name: 'posts[featured]', value: '1', type: 'checkbox', checked: @post.featured?}
+    -# %label{for: 'posts_featured'} Featured?
+
+  .fields
+    = f.input_field :published, boolean_style: :inline
+    = f.label :published
 
   - if @post.image.present?
     = image_tag @post.image.url(:thumb)
