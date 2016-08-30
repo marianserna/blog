@@ -46,7 +46,8 @@ class Post < ApplicationRecord
     renderer = Redcarpet::Render::HTML
     extensions = {
       autolink: true,
-      tables: true
+      tables: true,
+      fenced_code_blocks: true
     }
     markdown = Redcarpet::Markdown.new(renderer, extensions)
     markdown.render(content).html_safe

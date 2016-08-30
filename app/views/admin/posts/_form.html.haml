@@ -17,7 +17,14 @@
   - if @post.image.present?
     = image_tag @post.image.url(:thumb)
 
-  = f.input :image, as: :file
+  .file-field.input-field
+    .btn
+      %span Image
+      = f.input_field :image
+    .file-path-wrapper
+      %input.file-path.validate{type: :text}
+
+
   = f.input :title
   = f.input :summary
   = f.input :content

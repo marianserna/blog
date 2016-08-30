@@ -1,5 +1,11 @@
 = simple_form_for @post_image, url: [:admin, @post, @post_image] do |f|
   -# gives us an image uploader
-  = f.input :image
-  = f.submit
-  = link_to 'Cancel', edit_admin_post_url(@post)
+  -# = f.input :image
+  .file-field.input-field
+    .btn
+      %span Image
+      = f.input_field :image
+    .file-path-wrapper
+      %input.file-path.validate{type: :text}
+  = f.submit(class: 'btn waves-effect waves-light')
+  = link_to 'Cancel', edit_admin_post_url(@post), class: 'btn waves-effect waves-light'

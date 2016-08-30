@@ -1,17 +1,12 @@
 #container
-
-  .post_image
-    = image_tag @post.image.url(:hero)
-
   .post_titles
     %h2= @post.title
-    -# %p= "in: #{@post.category.name}"
     %p
-      in:
+      In:
       = @post.category.name
 
   .content
-    = @post.rendered_content
+    ~ @post.rendered_content
 
 .suggested_posts
   - @suggested_posts.each do |post|

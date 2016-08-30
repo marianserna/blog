@@ -12,3 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+$(function() {
+  // initializing highlight.js
+  hljs.initHighlightingOnLoad();
+
+  $('.menu-trigger').on('click', function() {
+    $('.mobile ul').slideToggle();
+  });
+});

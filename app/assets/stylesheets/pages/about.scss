@@ -2,28 +2,60 @@
   width: 100%;
   height: 100%;
   position: relative;
+  box-sizing: border-box;
+  position: relative;
+  padding: 10% 15% 5% 15%;
+  overflow: hidden;
 
   .massive {
     width: 70%;
     height: 70%;
     position: absolute;
-    font-family: 'News Cycle', sans-serif;
+    font-family: $h1-font;
     font-size: 25vw;
-    color: #80CBC4;
+    color: #CDDC39;
     opacity: 0.3;
-    bottom: 40%;
+    bottom: -20%;
     left: 5%;
     z-index: -5;
   }
 
   .text p {
-    width: 50%;
-    margin: 8% auto;
-    font-family: 'News Cycle', sans-serif;
+    width: 65%;
+    margin: 4% auto;
+    font-family: $p-font;
     font-size: 2vw;
     line-height: 3vw;
-    color: #424242;
+    color: $content-color;
   }
+}
 
+@media(min-width: 0px) and (max-width: $tablet-breakpoint) {
+  .about-container {
+    margin-top: 75px;
 
+    .text p {
+      width: 80%;
+      font-size: 3vw;
+      line-height: 6.5vw
+    }
+  }
+}
+
+@media (min-width: $desktop-breakpoint) {
+  .about-container {
+
+    .massive {
+      bottom: -5%;
+    }
+
+    .text p {
+      width: 65%;
+      margin: 100px auto;
+      font-family: $p-font;
+      font-size: 2vw;
+      line-height: 3vw;
+      color: $content-color;
+    }
+  }
 }

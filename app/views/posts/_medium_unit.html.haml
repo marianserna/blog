@@ -1,5 +1,9 @@
 %a.post_wrapper{class: :medium, href: post_url(post)}
-  .post{style: "background-image: url('#{post.image.url(:medium)}')"}
+  :css
+    .post_#{post.id} {
+      background-image: url('#{post.image.url(:medium)}');
+    }
+  .post{class: "post_#{post.id}"}
     .background
       .titles
         %h2= post.title
