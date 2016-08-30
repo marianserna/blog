@@ -53,4 +53,8 @@ class Post < ApplicationRecord
     markdown.render(content).html_safe
   end
 
+  def to_param
+    "#{id}-#{title}".parameterize
+  end
+
 end

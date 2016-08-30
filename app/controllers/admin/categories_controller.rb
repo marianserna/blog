@@ -1,4 +1,6 @@
 class Admin::CategoriesController < Admin::BaseController
+  before_action :load_category, only: [:edit, :update]
+
   def index
     @categories = Category.paginate(page: params[:page])
   end
@@ -18,11 +20,11 @@ class Admin::CategoriesController < Admin::BaseController
   end
 
   def edit
-    @category = Category.find(params[:id])
+    #load_category called before_action
   end
 
   def update
-    @category = Category.find(params[:id])
+    #load_category called before_action
     if @category.update(category_params)
       flash[:success] = 'Your category has been updated!'
       redirect_to admin_categories_url
@@ -37,5 +39,9 @@ class Admin::CategoriesController < Admin::BaseController
   def category_params
     # We require the params to have a category and we permit it to have a name and a slug
     params.require(:category).permit(:name, :slug, :image)
+  end
+
+  def load_category
+    @category = Category.find_by(slug: params[:id])
   end
 end

@@ -18,4 +18,8 @@ class Category < ApplicationRecord
     posts.published.count
   end
 
+  def to_param
+    slug
+  end
+
 end
