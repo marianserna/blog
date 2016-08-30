@@ -36,8 +36,12 @@
     padding: 10%;
     background-color: $h2-color;
 
+    h2, h3, h4, h5, h6 {
+      padding-top: 30px;
+    }
 
-    p {
+
+    p, li {
       font-family: $p-font;
       line-height: 1.3em;
       padding-top: 5%;

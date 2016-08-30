@@ -25,10 +25,11 @@ $(function() {
   if (textarea) {
     // Replace myTextarea with textarea
     var editor = CodeMirror.fromTextArea(textarea, {
-       lineNumbers: true,
+      lineNumbers: true,
       //  Add more options
       mode: 'markdown',
-      theme: 'material'
+      theme: 'material',
+      lineWrapping: true
    });
   }
 });
