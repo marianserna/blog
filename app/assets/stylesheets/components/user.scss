@@ -1,0 +1,44 @@
+
+.login {
+  overflow: hidden;
+  padding: 15%;
+  background-color: rgba(33,33,33,1);
+  text-align: center;
+
+  h2 {
+    font-family: $h2-font;
+    font-size: 2em;
+    color: $h2-user-color;
+    padding-bottom: 30px;
+  }
+
+  label {
+    font-size: 1.5em;
+    font-family: $p-font;
+    font-color: $p-color;
+    margin: 20px;
+    padding-bottom: 20px;
+    width: 60%;
+    color: #fff;
+    text-align: left;
+  }
+
+  input {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    width: 40%;
+    border: 0px;
+    font-size: 1.5em;
+    font-family: $p-font;
+  }
+
+  input[type="submit"] {
+    width: 150px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #CDDC39;
+    color: #263238;
+    border: none;
+  }
+}

@@ -49,11 +49,10 @@
 @media (min-width: $desktop-nav-break) {
   nav.desktop {
     position: fixed;
-    border-bottom: solid 0.5px #E0E0E0;
     height: 100px;
     z-index: 3;
     width: 100%;
-    background-color: white;
+    background-color: $nav-desktop-bg-color;
 
     ul {
       display: flex;
@@ -70,6 +69,10 @@
     ul li a {
       text-decoration: none;
       color: #BDBDBD;
+    }
+
+    ul li a:hover {
+      color: $nav-link-hover-color;
     }
 
     .right {

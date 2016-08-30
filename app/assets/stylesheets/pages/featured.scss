@@ -33,11 +33,12 @@
 
     .titles {
       padding: 15px;
+      z-index: 25;
     }
 
     .background {
       background-color: #fff;
-      transform: translateY(146%);
+      transform: translateY(-50%);
     }
 
     h2 {

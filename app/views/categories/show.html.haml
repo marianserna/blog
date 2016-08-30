@@ -1,14 +1,6 @@
-%h2= @category.name
-
-- @posts.each do |post|
-  %a.post_wrapper{class: :medium, href: post_url(post)}
-    .post{style: "background-image: url('#{post.image.url(:medium)}')"}
-      .background
-        .titles
-          %h2= post.title
-          %h3
-            In:
-            = post.category.name
-          %p= post.summary
+#index-container
+  .posts
+    - @posts.each do |post|
+      = render partial: 'posts/medium_unit', locals: {post: post}
 
 = will_paginate @posts
