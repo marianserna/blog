@@ -36,7 +36,6 @@ gem 'paperclip', '~> 5.0'
 gem 'will_paginate', '~> 3.1'
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 gem 'devise', '~> 4.2'
-gem 'codemirror-rails', '~> 5.16'
 gem 'materialize-sass', '~> 0.97.7'
 
 group :development, :test do

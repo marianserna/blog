@@ -13,9 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require materialize-sprockets
-//= require codemirror
-//= require codemirror/modes/markdown
-
 
 $(function() {
   // Put the text area input tag in a var
@@ -23,14 +20,9 @@ $(function() {
 
   // Since not every page has a text area, let us set an if statement:
   if (textarea) {
-    // Replace myTextarea with textarea
-    var editor = CodeMirror.fromTextArea(textarea, {
-      lineNumbers: true,
-      //  Add more options
-      mode: 'markdown',
-      theme: 'material',
-      lineWrapping: true
-   });
+    var simplemde = new SimpleMDE({
+      element: textarea
+    });
   }
 });
 
