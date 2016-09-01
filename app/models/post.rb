@@ -38,7 +38,7 @@ class Post < ApplicationRecord
   end
 
   def rendered_content
-    Kramdown::Document.new(content).to_html.html_safe
+    Kramdown::Document.new(content, input: 'GFM').to_html.html_safe
   end
 
   # To_param is a function that returns something and parameterize places a dash in between words
