@@ -21,7 +21,8 @@ $(function() {
   // Since not every page has a text area, let us set an if statement:
   if (textarea) {
     var simplemde = new SimpleMDE({
-      element: textarea
+      element: textarea,
+      indentWithTabs: false
     });
   }
 });
