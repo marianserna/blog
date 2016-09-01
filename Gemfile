@@ -35,6 +35,7 @@ gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'paperclip', '~> 5.0'
 gem 'will_paginate', '~> 3.1'
 gem 'redcarpet', '~> 3.3', '>= 3.3.4'
+gem 'kramdown', '~> 1.12'
 gem 'devise', '~> 4.2'
 gem 'materialize-sass', '~> 0.97.7'
 

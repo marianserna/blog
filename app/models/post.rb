@@ -38,20 +38,7 @@ class Post < ApplicationRecord
   end
 
   def rendered_content
-    #this is an instance function that creates a md processor
-    #shorter way to do it: markdown = Redcarpet::Markdown.new(Redcarpet::Render
-    # ::HTML, autolink: true, tables: true)
-    # markdown.render(content).html_safe
-    #Basically it shows md converted into html to the user.
-    renderer = Redcarpet::Render::HTML
-    extensions = {
-      autolink: true,
-      tables: true,
-      fenced_code_blocks: true,
-      disable_indented_code_blocks: true
-    }
-    markdown = Redcarpet::Markdown.new(renderer, extensions)
-    markdown.render(content).html_safe
+    Kramdown::Document.new(content).to_html.html_safe
   end
 
   # To_param is a function that returns something and parameterize places a dash in between words
