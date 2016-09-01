@@ -9,4 +9,11 @@ RSpec.describe Post do
       expect(html).to eq('<h1>Yada yada yada</h1>')
     end
   end
+
+  describe '#to_param' do
+    it 'returns id and title to use in URL' do
+      post = Post.new(id: 5, title: 'Yada Yada')
+      expect(post.to_param).to eq('5-yada-yada')
+    end
+  end
 end

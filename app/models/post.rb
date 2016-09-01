@@ -54,6 +54,8 @@ class Post < ApplicationRecord
     markdown.render(content).html_safe
   end
 
+  # To_param is a function that returns something and parameterize places a dash in between words
+  # This is called by the url rails helpers and placed into the url
   def to_param
     "#{id}-#{title}".parameterize
   end
