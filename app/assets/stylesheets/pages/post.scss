@@ -5,7 +5,7 @@
   background-color: $content-bg-color;
 
   .post_titles {
-    background-color: rgba(224,224,224 ,1);
+    background-color: #80DEEA;
     padding: 40px;
 
     h2 {
@@ -22,7 +22,7 @@
     p {
       font-family: $p-font;
       font-size: 1em;
-      line-height: 1.5em;
+      line-height: 2em;
       color: #000;
       text-align: right;
 
@@ -31,9 +31,8 @@
 
   .content {
     font-size: 1.2em;
-    line-height: 1.5em;
     color: #757575;
-    padding: 10%;
+    padding: 8% 10%;
     background-color: $h2-color;
 
     h2, h3, h4, h5, h6 {
@@ -41,10 +40,24 @@
     }
 
 
+    img {
+      max-width: 100%;
+    }
+
     p, li {
       font-family: $p-font;
-      line-height: 1.3em;
-      padding-top: 5%;
+      line-height: 1.8em;
+    }
+
+    .language-ruby.hljs {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+
+    p code {
+      background-color: #80DEEA;
+      padding: 5px;
+      border-radius: 3px;
     }
   }
 }
@@ -107,7 +120,7 @@
   }
 
   .content p, li {
-    font-size: 0.7em;
+    font-size: 0.8em;
   }
 
   .suggested_posts {
