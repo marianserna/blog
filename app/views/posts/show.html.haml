@@ -1,3 +1,12 @@
+- title(@post.title)
+- content_for(:meta) do
+  %meta{property: 'og:url', content: request.original_url}
+  %meta{property: 'og:type', content: 'article'}
+  %meta{property: 'og:title', content: @post.title}
+  %meta{property: 'og:description', content: @post.summary}
+  %meta{property: 'og:image', content: @post.image.url(:medium)}
+
+
 #container
   .post_titles
     %h2= @post.title

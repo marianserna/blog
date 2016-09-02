@@ -1,3 +1,11 @@
+- title(@category.name)
+- content_for(:meta) do
+  %meta{property: 'og:url', content: request.original_url}
+  %meta{property: 'og:type', content: 'website'}
+  %meta{property: 'og:title', content: @category.name}
+  %meta{property: 'og:description', content: "Articles from the #{@category.name} category."}
+  %meta{property: 'og:image', content: @category.image.url(:medium)}
+
 #index-container
   .posts
     - @posts.each do |post|

@@ -1,3 +1,11 @@
+- title('Home')
+- content_for(:meta) do
+  %meta{property: 'og:url', content: request.original_url}
+  %meta{property: 'og:type', content: 'website'}
+  %meta{property: 'og:title', content: "Marian's Blog"}
+  %meta{property: 'og:description', content: "Writing about Ruby, Rails, and web development."}
+  %meta{property: 'og:image', content: @post.image.url(:medium)}
+
 .home
   .latest
     .image{style: "background-image: url('#{@post.image.url(:hero)}')"}
