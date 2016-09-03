@@ -12,8 +12,9 @@
     .titles
       %h2= @post.title
       %h3
-        In:
-        = @post.category.name
+        %a{href: category_url(@post.category)}
+          In:
+          = @post.category.name
       %p= @post.summary
     = link_to 'READ POST', post_url(@post)
 

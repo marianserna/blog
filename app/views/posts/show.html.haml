@@ -11,8 +11,9 @@
   .post_titles
     %h2= @post.title
     %p
-      In:
-      = @post.category.name
+      %a{href: category_url(@post.category)}
+        In:
+        = @post.category.name
 
   .content
     ~ @post.rendered_content
@@ -20,3 +21,5 @@
 .suggested_posts
   - @suggested_posts.each do |post|
     = render partial: 'posts/medium_unit', locals: {post: post}
+
+%script{type: "text/javascript", src: "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57cad282a6548890"}
