@@ -38,6 +38,7 @@ gem 'redcarpet', '~> 3.3', '>= 3.3.4'
 gem 'kramdown', '~> 1.12'
 gem 'devise', '~> 4.2'
 gem 'materialize-sass', '~> 0.97.7'
+gem 'rack-cors', '~> 0.4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

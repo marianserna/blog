@@ -1805,6 +1805,28 @@ HAML COMMENTS:
 
 LINKING SUGGESTED POSTS TO BLOG
 
+- We need a Access-Control-Allow-Origin header in the blog:
+
+  Install rack-cors gem
+  bundle install
+
+  Go to config>application and paste the Rails 5 code (from homepage in the gem)
+
+  ```ruby
+  module Blog
+  class Application < Rails::Application
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+  end
+  ```
+
 - json responses
 
 posts controller > index action : Refactor the index:
@@ -1881,3 +1903,10 @@ RSpec.describe 'Posts', type: :request do
   end
 end
 ```
+
+Now, in my PORTFOLIO,
+
+Go to home view, delete the whole thing except the div #section#blog
+
+Go to assets> javascripts>application and create a new file called blog.js
+
