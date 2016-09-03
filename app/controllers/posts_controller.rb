@@ -1,6 +1,13 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.other_posts(params[:page])
+    respond_to do |format|
+      format.html do
+        @posts = Post.other_posts(params[:page])
+      end
+      format.json do
+        @posts = Post.published.most_recent.first(3)
+      end
+    end
   end
 
   def show

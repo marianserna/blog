@@ -1798,3 +1798,86 @@ HAML COMMENTS:
 
 -# / hello there
 -# <!-- hello there -->
+
+
+
+-----------------------------
+
+LINKING SUGGESTED POSTS TO BLOG
+
+- json responses
+
+posts controller > index action : Refactor the index:
+
+```ruby
+def index
+  respond_to do |format|
+    format.html do
+      @posts = Post.other_posts(params[:page])
+    end
+    format.json do
+      @posts = Post.published.most_recent.first(3)
+    end
+  end
+end
+```
+
+In views> posts, create a file named index.json.jbuilder
+
+
+```ruby
+json.array! @posts do |post|
+  json.(post, :id, :title, :summary)
+  json.url post_url(post)
+  json.category post.category.name
+  json.image_url asset_url(post.image.url(:medium))
+end
+```
+
+Build a test:
+
+
+Create a fixtures folder inside spec and put an image inside it
+Create a new folder in the spec folder, and a post_spec.rb file inside it
+
+```ruby
+RSpec.describe 'Posts', type: :request do
+  describe 'index' do
+    it 'returns posts in json format' do
+      # Setup
+      image = File.new(Rails.root + 'spec/fixtures/image.jpg')
+      category = Category.create!(name: 'Testing', slug: 'Testing Yada', image: image)
+      # Create post through the category relationship (has_many posts)
+      post = category.posts.create!(
+        title: 'Post for Test',
+        summary: 'Post summary yada',
+        content: ' yadaaaaaaaa',
+        published: true,
+        image: image
+      )
+      # Testing
+      # make a get request to url/posts.json (shows the post as json).
+      get '/posts.json'
+      expect(response).to be_success
+      # This gives access to the body of the response: Get all the json (this is a string but we want an object).
+      # Using JSON.parse, we convert the string into an object.
+      json = JSON.parse(response.body)
+      expect(json).to eq(
+      #expect json to be an array with one hash (we've created a single post)
+      # that has all the attributes we set in index.json.builder
+        [
+          {
+            'id' => post.id,
+            'title' => post.title,
+            'summary' => post.summary,
+            'url' => post_url(post),
+            'category' => post.category.name,
+            # example.com is the default url
+            'image_url' => "http://www.example.com#{post.image.url(:medium)}"
+          }
+        ]
+      )
+    end
+  end
+end
+```
