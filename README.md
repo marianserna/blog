@@ -1,24 +1,8 @@
-# README
+# Marian's Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This blog is a CMS that I decided to work on as a way of practising Ruby and Rails but also as a tool for me to remember things that I've learned.
 
-Things you may want to cover:
+To create this app I used RoR, Haml, JS, Sass, plus gems like `simple_form`, `paperclip`, `devise`, `redcarpet`, `will_paginate`, among others. For the admin I used the materialize framework but for the blog itself, I created all the styles from scratch.
 
-* Ruby version
+So far there are a few tests and an integration with my portfolio website (www.marianserna.com) that allows me to show the latest 3 posts in the portfolio.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
