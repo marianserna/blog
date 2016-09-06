@@ -1,4 +1,5 @@
 .about-container {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
   position: relative;
@@ -6,6 +7,7 @@
   position: relative;
   padding: 10% 15% 5% 15%;
   overflow: hidden;
+  z-index: -10;
 
   .massive {
     width: 70%;
@@ -14,7 +16,7 @@
     font-family: $h1-font;
     font-size: 25vw;
     color: #CDDC39;
-    opacity: 0.3;
+    opacity: 0.6;
     bottom: -20%;
     left: 5%;
     z-index: -5;
@@ -26,7 +28,8 @@
     font-family: $p-font;
     font-size: 2vw;
     line-height: 3vw;
-    color: $content-color;
+    color: #263238;
+    z-index: 3;
   }
 }
 
@@ -36,7 +39,7 @@
 
     .text p {
       width: 80%;
-      font-size: 3vw;
+      font-size: 3.3vw;
       line-height: 6.5vw
     }
   }
@@ -55,7 +58,7 @@
       font-family: $p-font;
       font-size: 2vw;
       line-height: 3vw;
-      color: $content-color;
+      color: #263238;
     }
   }
 }

@@ -10,8 +10,8 @@
 #container
   .post_titles
     %h2= @post.title
-    %p
-      %a{href: category_url(@post.category)}
+    %p.category_name
+      %a{href: category_url(@post.category), class: 'category_name'}
         In:
         = @post.category.name
 

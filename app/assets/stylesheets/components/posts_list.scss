@@ -1,9 +1,11 @@
+// Styles for: posts index, categories index, and other posts.
+
 #index-container {
   box-sizing: border-box;
   position: relative;
   padding: 10% 15% 5% 15%;
 
-  .post {
+  .posts, .categories {
     display: flex;
     position: relative;
     width: 100%;
@@ -12,64 +14,54 @@
     flex-wrap: wrap;
     padding-top: 10%;
 
-    a.medium.post_wrapper {
+    a.medium.post_wrapper, a.medium.category_wrapper {
       width: calc(30% - 10px);
       margin: 10px;
       text-decoration: none;
     }
 
-    .post {
+    .post, .category {
       background-size: cover;
       background-repeat: no-repeat;
       width: 100%;
       height: 250px;
       -webkit-filter: grayscale(100%);
       box-shadow: 2px 2px 3px #888888;
+      position: relative;
     }
 
-    .post:hover {
+    .post:hover, .category:hover {
       -webkit-filter: none;
+    }
+
+    .background {
+      width: 100%;
+      background-color: rgba(33,33,33,0.8);
+      position: absolute;
+      bottom: 0px;
     }
 
     .titles {
       padding: 15px;
-    }
+      z-index: 25;
 
-    .background {
-      background-color: #fff;
-      transform: translateY(0%);
-    }
+      h2 {
+        font-size: 1em;
+        padding-bottom: 5px;
+        border-bottom: solid 1px #fff;
+      }
 
-    h2 {
-      font-family: 'Playfair Display', serif;
-      border-bottom: solid 1px #263238;
-      font-size: 1em;
-      line-height: 1em;
-      color: #263238;
-    }
-
-    h2:hover {
-      color: #CDDC39;
-    }
-
-    h3, p {
-      font-family: 'News Cycle', sans-serif;
-      font-size: 0.5em;
-      line-height: 1.6em;
-      color: #263238;
+      p {
+        color: #fff;
+      }
     }
   }
 }
 
 @media(max-width: $tablet-breakpoint) {
 
-  #index-container .posts a.medium.post_wrapper {
+  #index-container .posts a.medium.post_wrapper,
+  #index-container .categories a.medium.category_wrapper {
     width: 100%;
-  }
-
-  .posts {
-    flex-direction: column;
-    justify-content: center;
-    flex-grow: 1;
   }
 }

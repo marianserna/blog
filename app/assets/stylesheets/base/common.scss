@@ -1,0 +1,37 @@
+.home {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+a.category, #container p a.category_name {
+  color: #fff;
+  font-family: $h2-font;
+  font-size: 0.8em;
+  text-decoration: none;
+}
+
+h2 {
+  font-family: $h2-font;
+  border-bottom: solid 1px #fff;
+  font-size: 1.5em;
+  line-height: 1em;
+  color: $h2-color;
+  padding-top: 8%;
+}
+
+h3 {
+  font-family: $h2-font;
+  font-size: 0.8em;
+  line-height: 0.6em;
+  color: $h3-color;
+}
+
+p {
+  font-family: $h2-font;
+  font-size: 1em;
+  line-height: 1.5em;
+}

@@ -2,15 +2,18 @@
 $mobile-breakpoint: 480px;
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 769px;
+
+// Nav Breakpoints
 $mobile-nav-break: 768px;
 $desktop-nav-break: 769px;
 
 // Colours
-$h2-color: #fff;
+$h2-color: #CDDC39;
 $h2-user-color: #80DEEA;
-$h3-color: #80DEEA;
+$h3-color: #CDDC39;
 $p-color: #fff;
 $content-color: #424242;
+$content-bg-color: #F5F5F5;
 $titles-bg-color: #263238;
 $box-shadow-color: #212121;
 $line-color: #263238;
@@ -19,13 +22,15 @@ $content-bg-color: #212121;
 $nav-text-color: #BDBDBD;
 $a-hover-color: #80DEEA;
 $nav-desktop-bg-color: #212121;
-$nav-link-hover-color: #80DEEA;
+$nav-link-hover-color: #CDDC39;
+$read-link-hover-color: #D4E157;
+$aside-h2-hover: #D4E157;
 
 // Fonts
 
 $h1-font: 'Playfair Display', serif;
 $h2-font: 'Playfair Display', serif;
-$nav-font: 'Oswald', sans-serif;
+$nav-font: 'Domine', serif;
 $h3-font: 'Dosis', sans-serif;
 $p-font: 'Dosis', sans-serif;
 $a-font: 'Dosis', sans-serif;

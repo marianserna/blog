@@ -5,40 +5,36 @@
   background-color: $content-bg-color;
 
   .post_titles {
-    background-color: #80DEEA;
+    background-color: #90A4AE;
     padding: 40px;
 
     h2 {
       font-family: $h2-font;
       font-size: 3em;
       line-height: 1.5em;
-      color: #263238;
+      color: #CDDC39;
       margin-top: 0px;
       padding-top: 15px;
       margin-bottom: 0.3em;
       text-align: right;
     }
 
-    p {
-      font-family: $p-font;
-      font-size: 1em;
-      line-height: 2em;
-      color: #000;
+    p.category_name {
       text-align: right;
-
     }
   }
 
   .content {
     font-size: 1.2em;
     color: #757575;
-    padding: 8% 10%;
-    background-color: $h2-color;
+    padding: 8% 20%;
+    background-color: #f5f5f5;
 
     h2, h3, h4, h5, h6 {
       padding-top: 30px;
+      border-bottom: none;
+      color: #263238;
     }
-
 
     img {
       max-width: 100%;
@@ -55,7 +51,7 @@
     }
 
     p code {
-      background-color: #80DEEA;
+      background-color: #B0BEC5;
       padding: 5px;
       border-radius: 3px;
     }
@@ -98,30 +94,42 @@
 
     h2 {
       font-family: $h2-font;
-      color: rgba(38,50,56 ,1);
+      color: #263238;
     }
 
     h3 {
       font-family: $h3-font;
-      color: $h2-color;
+      color: #455A64;
     }
 
     p {
       font-family: $p-font;
-      color: rgba(38,50,56 ,1);
+      color: #263238;
     }
   }
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media(max-width: $tablet-breakpoint) {
 
   #container {
     padding: 100px 5% 2% 5%;
+
+    .post_titles h2 {
+      font-size: 1.5em;
+    }
+
+    .content {
+      padding: 8% 12%;
+
+      p, li {
+        font-size: 0.8em;
+      }
+    }
   }
 
-  .content p, li {
-    font-size: 0.8em;
-  }
+}
+
+@media(max-width: $mobile-breakpoint) {
 
   .suggested_posts {
     display: none;

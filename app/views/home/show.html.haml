@@ -12,7 +12,7 @@
     .titles
       %h2= @post.title
       %h3
-        %a{href: category_url(@post.category)}
+        %a{href: category_url(@post.category), class: 'category'}
           In:
           = @post.category.name
       %p= @post.summary
