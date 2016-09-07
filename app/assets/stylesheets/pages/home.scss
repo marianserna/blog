@@ -24,8 +24,9 @@
       }
 
       a.read {
-        position: relative;
-        left: 30%;
+        position: absolute;
+        bottom: -7%;
+        right: 10%;
         text-decoration: none;
         color: #fff;
         padding: 20px;
@@ -36,7 +37,8 @@
       }
 
       a.read:hover {
-        color: $read-link-hover-color;
+        background-color: $read-link-hover-color;
+        color: #263238;
       }
 
       p {
@@ -131,8 +133,8 @@
 
     a.read {
       position: absolute;
-      top: 65%;
-      right: 20%;
+      bottom: -8%;
+      right: 5%;
       text-decoration: none;
       color: #fff;
       padding: 20px;
@@ -143,7 +145,8 @@
     }
 
     a.read:hover {
-      color: $read-link-hover-color;
+      background-color: $read-link-hover-color;
+      color: #263238;
     }
   }
 }
