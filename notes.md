@@ -1,7 +1,7 @@
 ```
 gem update rails
 rails new blog --database=postgresql
-rails db:create
+Inside the new folder  do ---> rails db:create
 ```
 
 Initialize git repository
@@ -1245,6 +1245,7 @@ Run `rails g devise:views` --> this is erb
 Run `rails generate devise Model` (MODEL IN THIS CASE WOULD BE USER)
 
 Devise creates a model, migration, views, and tests for you.
+
 
 In the user.rb model, keep only `:database_authenticatable` and
 delete the others.
