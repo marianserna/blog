@@ -37,6 +37,7 @@ h2 {
 
 h3 {
   font-family: $h2-font;
+  font-size: 1.4em;
   line-height: 1.5em;
 }
 
@@ -54,4 +55,9 @@ p {
   line-height: 2em;
   color: #3A4457;
   word-break: break-word;
+}
+
+ul li {
+  font-family: $li-font;
+  font-size: 1.3rem;
 }
