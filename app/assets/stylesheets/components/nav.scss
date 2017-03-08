@@ -64,16 +64,21 @@
       padding: 10px;
       font-family: $nav-font;
       font-size: 1.5em;
-      color: #616161;
+      color: #A2FAA3;
+    }
+
+    li:last-child {
+      margin-left: auto;
+      padding-right: 35px;
     }
 
     ul li a {
       text-decoration: none;
-      color: #BDBDBD;
+      color: #9068BE;
     }
 
     ul li a:hover {
-      color: $nav-link-hover-color;
+      color: #A2FAA3;
     }
 
     .right {

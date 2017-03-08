@@ -16,7 +16,7 @@
         = @post.category.name
     %p.post_info
       = @post.created_at.to_date.to_s(:long)
-      = "-> { By: Marian Serna }"
+      = "⨳ { By: Marian Serna }"
 
   .content
     -# Use squigly instead of equals for proper haml indentation in <pre>
@@ -24,6 +24,10 @@
 
 .suggested_posts
   - @suggested_posts.each do |post|
-    = render partial: 'posts/medium_unit', locals: {post: post}
+    .suggested_post_container
+      %h3
+        = link_to post.title, post_url(post)
+      %h4
+        = link_to post.category.name, category_url(post.category)
 
 %script{type: "text/javascript", src: "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-57cad282a6548890"}

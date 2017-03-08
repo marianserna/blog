@@ -7,6 +7,7 @@
   %meta{property: 'og:image', content: @category.image.url(:medium)}
 
 #index-container
+  %h2= @category.name
   .posts
     - @posts.each do |post|
       = render partial: 'posts/medium_unit', locals: {post: post}

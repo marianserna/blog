@@ -1,152 +1,88 @@
+.sidebar {
+  visibility: hidden;
+}
+
 @media (max-width: $tablet-breakpoint) {
   .home {
-    flex-direction: column;
+    position: absolute;
+    top: 100px;
+    display: block;
+    width: 100%;
 
     .latest {
-      position: relative;
-      padding-top: 25%;
-
-      .image {
-        display: none;
-      }
-
-      .titles {
-        position: relative;
-        height: 40vh;
-        line-height: 0.5em;
-        background-color: $titles-bg-color;
-        padding: 2.5em;
-        box-shadow: 2px 2px 3px $box-shadow-color;
-      }
-
-      h2 {
-        padding-bottom: 5px;
-      }
-
-      a.read {
-        position: absolute;
-        bottom: -7%;
-        right: 10%;
-        text-decoration: none;
-        color: #fff;
-        padding: 20px;
-        border-radius: 3%;
-        font-family: $h2-font;
-        background-color: $a-bg-color;
-        box-shadow: 2px 2px 3px $titles-bg-color;
-      }
-
-      a.read:hover {
-        background-color: $read-link-hover-color;
-        color: #263238;
-      }
-
-      p {
-        color: $p-color;
-        font-family: $h2-font;
-        font-size: 1em;
-        line-height: 1.5em;
-      }
+      width: 100%;
+      display: block;
     }
 
-    aside {
-      a {
-        display: none;
-      }
-
-      h2 {
-        border-bottom: none;
-      }
+    .titles {
+      padding: 50px;
     }
   }
 }
 
 
 @media (min-width: $desktop-breakpoint) {
+  .home {
+    position: absolute;
+    top: 100px;
+    display: flex;
+    width: 100%;
+    height: 100vh;
 
-  .titles h2 {
-    padding-bottom: 5px;
-  }
-
-  .sidebar {
-    width: 30%;
-    margin: 150px 0 50px 0;
-    border-left: solid 1px #E0E0E0;
-
-    aside {
-      padding: 15%;
-    }
-
-    aside a {
-      width: 100%;
-      text-decoration: none;
+    .latest {
+      width: 70%;
       display: block;
-      font-family: 'Playfair Display', serif;
-      background-color: #263238;
-      margin: 15px;
-      padding: 5px;
-      text-align: center;
-      box-shadow: 2px 2px 3px #888888;
+
+      .titles {
+        padding: 55px;
+        margin: 0 30px 30px 30px;
+
+        h3 {
+          color: #9068BE;
+        }
+      }
     }
 
-    aside h2 {
-      font-size: 1.5em;
-      color: #fff;
-      border-bottom: none;
-      padding-top: 0px;
-    }
+    .sidebar {
+      visibility: visible;
+      width: 30%;
+      display: flex;
+      padding-top: 100px;
+      justify-content: center;
+      align-items: baseline;
+      right: 0;
 
-    aside h2:hover {
-      color: $aside-h2-hover;
-    }
-  }
+      .post-container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        text-decoration: none;
+        padding: 25px;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        margin-bottom: 10px;
 
-  .latest {
-    width: 45%;
-    height: 400px;
-    margin-top: 150px;
-    margin-right: 10%;
-    position: relative;
+        &:hover {
+          background: #BEF1ED;
+          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+      }
 
-    .image {
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-repeat: no-repeat;
-      position: absolute;
-      -webkit-filter: blur(2px);
-      -moz-filter: blur(2px);
-      -o-filter: blur(2px);
-      -ms-filter: blur(2px);
-      filter: blur(2px);
-      transform: rotate(-5deg);
-    }
+      h3 {
+        color: #9A9FB6;
+      }
 
-    .titles {
-      transform: translateX(-18%) translateY(30%);
-      line-height: 0.5em;
-      color: #fff;
-      background-color: #263238;
-      padding: 1.5em;
-      box-shadow: 2px 2px 3px #212121;
-    }
+      h3.previous {
+        font-size: 1.7rem;
+        border-bottom: solid 1px #9068BE;
+      }
 
-    a.read {
-      position: absolute;
-      bottom: -8%;
-      right: 5%;
-      text-decoration: none;
-      color: #fff;
-      padding: 20px;
-      border-radius: 3%;
-      font-family: 'Playfair Display', serif;
-      background-color: $a-bg-color;
-      box-shadow: 1px 1px 1px $titles-bg-color;
-    }
-
-    a.read:hover {
-      background-color: $read-link-hover-color;
-      color: #263238;
+      h4 {
+        padding-left: 10px
+      }
     }
   }
 }

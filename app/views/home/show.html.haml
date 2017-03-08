@@ -4,27 +4,26 @@
   %meta{property: 'og:type', content: 'website'}
   %meta{property: 'og:title', content: "Marian's Blog"}
   %meta{property: 'og:description', content: "Writing about Ruby, Rails, and web development."}
-  %meta{property: 'og:image', content: @post.image.url(:medium)}
+  %meta{property: 'og:image', content: @latest_post.image.url(:medium)}
 
 .home
   .latest
-    .image{style: "background-image: url('#{@post.image.url(:hero)}')"}
     .titles
-      %h2= @post.title
+      %h2= @latest_post.title
       %h3
-        %a{href: category_url(@post.category), class: 'category'}
-          In:
-          = @post.category.name
-      %p= @post.summary
-      = link_to 'READ POST', post_url(@post), class: 'read'
+        -# %a{href: category_url(@latest_post.category), class: 'category'}
+        In:
+        = @latest_post.category.name
+      %p= @latest_post.content
+      -# = link_to 'READ POST', post_url(@latest_post), class: 'read'
 
   .sidebar
     %aside
-      %a{href: featured_posts_url}
-        %h2 Featured
-
-      %a{href: categories_url}
-        %h2 Categories
-
-      %a{href: posts_url}
-        %h2 Other Posts
+      %h3.previous Previous Posts
+      - @previous_posts.each do |post|
+        .post-container
+          %h3
+            = link_to post.title, post_url(post), class: 'read'
+            ⪼
+          %h4
+            = link_to post.category.name, category_url(post.category), class: 'category'

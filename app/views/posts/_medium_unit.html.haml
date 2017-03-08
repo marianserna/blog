@@ -1,13 +1,8 @@
 %a.post_wrapper{class: :medium, href: post_url(post)}
-  :css
-    .post_#{post.id} {
-      background-image: url('#{post.image.url(:medium)}');
-    }
-  .post{class: "post_#{post.id}"}
+  .post
     .background
       .titles
-        %h2= post.title
-        %h3
-          In:
-          = post.category.name
-
+        %h3= post.title
+        %h4
+          From:
+          = post.created_at.to_date.to_s(:long)

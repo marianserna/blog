@@ -22,21 +22,6 @@ class Post < ApplicationRecord
     published.most_recent.first
   end
 
-  def self.featured_posts
-    featured.most_recent.
-      where.not(id: latest.id).
-      limit(6)
-  end
-
-  def self.other_posts(page)
-    exclude_ids = featured_posts.pluck(:id)
-    exclude_ids << latest.id
-
-    published.most_recent.
-      where.not(id: exclude_ids).
-      paginate(page: page)
-  end
-
   def rendered_content
     Kramdown::Document.new(content, input: 'GFM').to_html.html_safe
   end
