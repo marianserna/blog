@@ -14,7 +14,8 @@
         -# %a{href: category_url(@latest_post.category), class: 'category'}
         In:
         = @latest_post.category.name
-      %p= @latest_post.content
+      .content
+        ~ @latest_post.rendered_content
       -# = link_to 'READ POST', post_url(@latest_post), class: 'read'
 
   .sidebar
